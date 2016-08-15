@@ -1,0 +1,164 @@
+---
+title: "ReviewR"
+author: "Feng Ji"
+date: "July 24, 2016"
+output: html_document
+---
+
+```{r 1}
+
+# an function different from creating functions in JAVA 
+oddadder <- function(x){
+  k <- 0 
+  for (n in x) {
+      if(n %% 2 == 1)
+      k = k + 1
+  }
+  return(k)
+}
+oddadder(c(1, 2, 2, 3, 3))
+
+# `x` is the formal argument ( or formal parameter) of oddadder() function.
+
+
+#Scoping rule: 
+z <-  c(2, 2, 7)
+oddadder(z)
+# z will not be changed
+
+# variables created outside functions are global functions
+f <-  function(x) return (x + y)
+y <-  3
+f(5)
+
+```
+
+
+```{R default Arguments }
+g <- function(x, y = 2, z = TRUE) {
+  x
+  y
+  z
+}
+
+# x will be initialized to 2
+
+g(12, z = FALSE)
+# x will equal to 12, y = 2 and z will be overrided as FALSE
+
+
+```
+
+
+``` {R the heart of R: vector}
+# String manipulation
+# Just like JAVA
+x <- paste("a", " b", "c")
+strsplit(x, " ")
+
+
+# Matrix(by the way I LOVE matrix and I think it is much more powerful than xxx):
+m <-  rbind(c(1, 4), c(2, 2))
+m
+# product:
+m %*% c(1, 1)
+
+str
+
+```
+
+
+```{R Vectors}
+x <- c(88, 5, 12, 13)
+x <- c(x[1:3], 168, x[4])
+length(x)
+
+first1 <- function(x){
+  for(i in 1:length(x)){
+    if(x[i] == 1) break
+  }
+  return(i)
+}
+
+first1(x)
+x[1]
+
+
+x <- c()
+length(x)
+1:length(x)
+
+
+y <- vector(length = 2)
+y[1] <-  1
+y[2] <-  2
+
+x <- c(1, 2, 5) + c(6, 0, 9, 20, 22)
+
+x
+
+"*"(2, 3)
+"+"(2, 3)
+x <- c(1, 2, 4)
+x*c(5, 0, -1)
+
+
+y <- c(1.2, 3.9, 0.4, 0.12)
+
+y[c(1,3)]
+
+y[c(-length(y))]
+
+i <- 2
+1:i-1
+
+1:(i-1)
+
+
+seq(12, 30, 3)
+seq(5, 12, 13)
+x <- c(5, 12, 13) #why the output is 1 2 3 <- counting numbers
+x <- seq(5, 104, 1)
+x <- c(1, 2, 3,3,,3, 5)
+seq(x)
+?seq
+
+x <- rep(8, 4)
+x <- rep(1:5,5)
+x
+rep(c())
+
+
+```
+
+
+```{usage of all() and any()}
+x <- 1:10
+any(x>5)
+any(x > 11)
+
+all(x>10)
+all(x>-1)
+
+
+### finding a "run"
+
+findruns <- function(x, k){
+  n <- length(x)
+  runs <- NULL
+  for(i in 1 : (n - k + 1)){
+    if(all(x[i:i + k - 1] == 1)) runs <- c(runs, i)
+  }
+  
+  return(runs)
+  
+}
+# test
+findruns(c(1, 0, 0, 1, 1, 1, 0, 1 , 1), 2)
+# there is a phrase: runs <- c(runs, i)
+
+x <- 2
+x <- c(x, 1)
+x <- c(x, 3)
+x
+# here we can see x <- c(x, 1) could be used to accumulate previous data
